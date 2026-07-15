@@ -695,3 +695,44 @@ joblib.dump(scaler, 'scaler.pkl')
 print("\n✅ Model dan Scaler berhasil disimpan!")
 print("   - best_model.pkl")
 print("   - scaler.pkl")
+
+# ============================================================
+# CELL TAMBAHAN - TEMPEL DI PALING BAWAH NOTEBOOK COLAB KAMU
+# (Dijalankan SETELAH cell yang menyimpan best_model.pkl & scaler.pkl)
+# TIDAK mengubah kode ML yang sudah ada, hanya menambah proses EXPORT
+# ============================================================
+
+import joblib
+
+# 1. Daftar kolom hasil One-Hot Encoding (urutan harus identik saat inference)
+feature_columns = X_train_encoded.columns.tolist()
+joblib.dump(feature_columns, 'feature_columns.pkl')
+
+# 2. Nilai median tiap kolom -> baseline untuk fitur yang tidak ada di form
+feature_medians = X_train_encoded.median()
+joblib.dump(feature_medians, 'feature_medians.pkl')
+
+# 3. Hasil evaluasi model -> dipakai di menu Model Evaluation & Feature Importance
+eval_results = {
+    'model_name': model_name,
+    'rmse': best_rmse,
+    'mae': best_mae,
+    'r2': best_r2,
+    'y_val_actual': y_val_final,
+    'y_val_pred': y_pred_final,
+    'comparison_table': results_comparison,
+    'feature_importance': feature_importance if model_name in
+        ['XGBoost', 'Random Forest'] else None,
+}
+joblib.dump(eval_results, 'eval_results.pkl')
+
+print("✅ File tambahan berhasil disimpan:")
+print("   - feature_columns.pkl")
+print("   - feature_medians.pkl")
+print("   - eval_results.pkl")
+print("\nSekarang download semua file .pkl (lihat panel folder di sisi kiri Colab):")
+print("   - best_model.pkl")
+print("   - scaler.pkl")
+print("   - feature_columns.pkl")
+print("   - feature_medians.pkl")
+print("   - eval_results.pkl")
