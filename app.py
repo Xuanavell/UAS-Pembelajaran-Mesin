@@ -248,58 +248,54 @@ if menu == "🏡 Home":
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.subheader("📌 Deskripsi Project")
-        st.write(
-            """
-            Project ini bertujuan membangun model *machine learning* untuk
-            memprediksi harga jual rumah (**SalePrice**) berdasarkan
-            karakteristik properti seperti luas bangunan, kualitas material,
-            jumlah kamar, tahun dibangun, dan berbagai fitur lainnya.
+        with st.container(border=True):
+            st.subheader("📌 Deskripsi Project")
+            st.write(
+                """
+                Project ini bertujuan membangun model *machine learning* untuk
+                memprediksi harga jual rumah (**SalePrice**) berdasarkan
+                karakteristik properti seperti luas bangunan, kualitas material,
+                jumlah kamar, tahun dibangun, dan berbagai fitur lainnya.
 
-            Model dikembangkan menggunakan tahapan standar *data science
-            pipeline*: mulai dari eksplorasi data (EDA), penanganan
-            *missing values*, *feature engineering*, *encoding*,
-            *scaling*, hingga perbandingan beberapa algoritma regresi.
-            """
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
+                Model dikembangkan menggunakan tahapan standar *data science
+                pipeline*: mulai dari eksplorasi data (EDA), penanganan
+                *missing values*, *feature engineering*, *encoding*,
+                *scaling*, hingga perbandingan beberapa algoritma regresi.
+                """
+            )
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.subheader("🎯 Tujuan Project")
-        st.write(
-            """
-            - Membangun model prediksi harga rumah dengan akurasi tinggi.
-            - Membandingkan performa **Linear Regression**, **Random Forest**,
-              dan **XGBoost** untuk menentukan model terbaik.
-            - Target performa: RMSE < \\$25.000, MAE < \\$20.000, R² > 0.85.
-            - Menyediakan aplikasi interaktif agar model dapat digunakan
-              secara langsung oleh pengguna non-teknis.
-            """
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
+        with st.container(border=True):
+            st.subheader("🎯 Tujuan Project")
+            st.write(
+                """
+                - Membangun model prediksi harga rumah dengan akurasi tinggi.
+                - Membandingkan performa **Linear Regression**, **Random Forest**,
+                  dan **XGBoost** untuk menentukan model terbaik.
+                - Target performa: RMSE < \\$25.000, MAE < \\$20.000, R² > 0.85.
+                - Menyediakan aplikasi interaktif agar model dapat digunakan
+                  secara langsung oleh pengguna non-teknis.
+                """
+            )
 
     with col2:
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.subheader("🏆 Model Terbaik")
-        st.metric("Model", MODEL_NAME)
-        if eval_results:
-            st.metric("Validation R²", f"{eval_results['r2']:.4f}")
-            st.metric("Validation RMSE", format_usd(eval_results["rmse"]))
-        st.markdown("</div>", unsafe_allow_html=True)
+        with st.container(border=True):
+            st.subheader("🏆 Model Terbaik")
+            st.metric("Model", MODEL_NAME)
+            if eval_results:
+                st.metric("Validation R²", f"{eval_results['r2']:.4f}")
+                st.metric("Validation RMSE", format_usd(eval_results["rmse"]))
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-        st.subheader("📂 Dataset")
-        st.write(
-            """
-            **House Prices - Advanced Regression Techniques** (Kaggle)
+        with st.container(border=True):
+            st.subheader("📂 Dataset")
+            st.write(
+                """
+                **House Prices - Advanced Regression Techniques** (Kaggle)
 
-            - ± 1.460 baris data training
-            - ± 80 fitur properti (ukuran, kualitas, lokasi, tahun, dll.)
-            - Target: `SalePrice` (harga jual rumah dalam USD)
-            """
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
+                - ± 1.460 baris data training
+                - ± 80 fitur properti (ukuran, kualitas, lokasi, tahun, dll.)
+                - Target: `SalePrice` (harga jual rumah dalam USD)
+                """
+            )
 
     st.info(
         "Gunakan menu di sidebar untuk menjelajahi analisis data (EDA), "
@@ -439,7 +435,6 @@ elif menu == "🔮 House Price Prediction":
         )
     else:
         with st.form("prediction_form"):
-            st.markdown('<div class="card">', unsafe_allow_html=True)
             col1, col2, col3 = st.columns(3)
 
             with col1:
@@ -458,7 +453,6 @@ elif menu == "🔮 House Price Prediction":
                 tot_rms_abvgrd = st.slider("Total Rooms (Above Ground)", 2, 14, 7)
                 lot_area = st.number_input("Lot Area (sq ft)", 1000, 220000, 9500, step=100)
 
-            st.markdown("</div>", unsafe_allow_html=True)
             submitted = st.form_submit_button("🔮 Predict House Price", use_container_width=True)
 
         if submitted:
